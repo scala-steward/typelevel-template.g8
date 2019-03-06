@@ -1,23 +1,81 @@
-sudo: false
+sudo: required
+
 language: scala
 
 scala:
-  - $scala_version$
+  - 2.12.8
+  - 2.13.0-M5
 
 jdk:
-  - oraclejdk8
+  - openjdk11
 
-# Cleanup the cached directories to avoid unnecessary cache updates
-before_cache:
-  - find $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
-  - find $HOME/.sbt -name "*.lock" -print -delete
+before_install:
+  - export PATH=\${PATH}:./vendor/bundle
 
-script:
-  ## This runs the template with the default parameters
-  - sbt -Dfile.encoding=UTF8 -J-XX:ReservedCodeCacheSize=256M test
+install:
+  - pip install --user codecov
+  - rvm use 2.6.0 --install --fuzzy
+  - gem update --system
+  - gem install sass
+  - gem install jekyll -v 3.8.5
 
-# These directories are cached to S3 at the end of the build
+stages:
+  - name: cov
+  - name: fmt
+  - name: build
+  - name: mima
+  - name: microsite
+  - name: release
+    if: (branch = master AND type = push) OR (tag IS present)
+  - name: publishMicrosite
+    if: tag IS present
+
+jobs:
+  include:
+    - &cov
+      stage: cov
+      name: "cov"
+      script: sbt ++\$TRAVIS_SCALA_VERSION clean coverage test coverageReport && codecov
+      after_success: bash <(curl -s https://codecov.io/bash)
+
+    - &fmt
+      stage: fmt
+      name: "fmt"
+      script: sbt ++\$TRAVIS_SCALA_VERSION scalafmtCheck test:scalafmtCheck scalafmtSbtCheck undeclaredCompileDependenciesTest unusedCompileDependenciesTest headerCheck
+
+    - &build
+      stage: build
+      name: "build"
+      script: sbt ++\$TRAVIS_SCALA_VERSION clean test tut
+
+    - &mima
+      stage: mima
+      name: "mima"
+      script: sbt ++\$TRAVIS_SCALA_VERSION mimaReportBinaryIssues
+
+    - &microsite
+      stage: microsite
+      name: "microsite"
+      script: sbt ++\$TRAVIS_SCALA_VERSION docs/makeMicrosite
+
+    - &release
+      stage: release
+      name: "release"
+      script: sbt ++\$TRAVIS_SCALA_VERSION publish
+
+    - &publishMicrosite
+      stage: publishMicrosite
+      name: "publichMicrosite"
+      script: sbt ++\$TRAVIS_SCALA_VERSION docs/publishMicrosite
+
 cache:
   directories:
-    - $HOME/.ivy2/cache
-    - $HOME/.sbt
+    - \$HOME/.ivy2/cache
+    - \$HOME/.sbt/boot/
+
+before_cache:
+  - du -h -d 1 \$HOME/.ivy2/
+  - du -h -d 2 \$HOME/.sbt/
+  - find \$HOME/.ivy2 -name "ivydata-*.properties" -type f -delete
+  - find \$HOME/.sbt -name "*.lock" -delete
+  - rm -rf \$HOME/.ivy2/local

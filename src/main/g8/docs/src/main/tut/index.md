@@ -1,3 +1,8 @@
+---
+layout: home
+
+---
+
 # $name;format="cap"$
 
 [![Build Status](https://travis-ci.com/$contributorUsername$/$name$.svg?branch=master)](https://travis-ci.com/$contributorUsername$/$name$)
@@ -15,9 +20,7 @@ Add this to your `build.sbt`:
 libraryDependencies += "$organization$" %% "$name$" % "<version>"
 ```
 
-Cross-builds are available for Scala 2.12.x and $scala_version_213$.
-
-Find out more in the [microsite](https://$contributorUsername$.github.io/$name$).
+Cross-builds are available for Scala 2.12 and $scala_version_213$.
 
 ### Documentation
 

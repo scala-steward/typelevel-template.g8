@@ -1,4 +1,4 @@
-package $organization$
+package $package$
 
 import cats.implicits._
 import cats.effect._
