@@ -1,0 +1,23 @@
+sudo: false
+language: scala
+
+scala:
+  - $scala_version$
+
+jdk:
+  - oraclejdk8
+
+# Cleanup the cached directories to avoid unnecessary cache updates
+before_cache:
+  - find $HOME/.ivy2/cache -name "ivydata-*.properties" -print -delete
+  - find $HOME/.sbt -name "*.lock" -print -delete
+
+script:
+  ## This runs the template with the default parameters
+  - sbt -Dfile.encoding=UTF8 -J-XX:ReservedCodeCacheSize=256M test
+
+# These directories are cached to S3 at the end of the build
+cache:
+  directories:
+    - $HOME/.ivy2/cache
+    - $HOME/.sbt
