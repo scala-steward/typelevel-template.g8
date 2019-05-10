@@ -1,14 +1,32 @@
 # Typelevel Giter8 Template 
 
 [![Build Status](https://travis-ci.com/olivierschultz/typelevel-template.g8.svg?branch=master)](https://travis-ci.com/olivierschultz/typelevel-template.g8)
-[![codecov](https://codecov.io/gh/olivierschultz/typelevel-template/branch/master/graphs/badge.svg)](https://codecov.io/gh/olivierschultz/typelevel-template)<a href="https://typelevel.org/cats/"><img src="https://typelevel.org/cats/img/cats-badge.svg" height="40px" align="right" alt="Cats friendly" /></a>
+[![codecov](https://codecov.io/gh/olivierschultz/typelevel-template/branch/master/graphs/badge.svg)](https://codecov.io/gh/olivierschultz/typelevel-template)
+<a href="https://typelevel.org/cats/"><img src="https://typelevel.org/cats/img/cats-badge.svg" height="40px" alt="Cats friendly" /></a>
 
 This is a [Giter8](http://www.foundweekends.org/giter8/) template to start new Typelevel Scala Projects based on Cats v1.x.x.
 
 __Prerequisites__:
 * JDK8+
 * Giter8 0.11.0
-* Scala 2.12.x (also compatible with 2.13.0-M5)
+* Scala 2.12.x (also compatible with scala 2.11.12 and 2.13.0-RC1)
+
+### Features
+
+|                           | light (`light-features`) | medium (`master`)  | heavy (`heavy-features`) |
+|---------------------------|--------------------------|--------------------|--------------------------|
+| scalafmt                  | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
+| sbt-tpolecat              | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
+| sbt-explicit-dependencies |                          | :heavy_check_mark: | :heavy_check_mark:       |
+| sbt-wartremover           |                          | :heavy_check_mark: | :heavy_check_mark:       |
+| sbt-scoverage             |                          | :heavy_check_mark: | :heavy_check_mark:       |
+| TravisCI                  |                          | :heavy_check_mark: | :heavy_check_mark:       |
+| sbt-header                |                          |                    | :heavy_check_mark:       |
+| tut-plugin                |                          |                    | :heavy_check_mark:       |
+| sbt-microsites            |                          |                    | :heavy_check_mark:       |
+| sbt-release               |                          |                    | :heavy_check_mark:       |
+| sbt-pgp                   |                          |                    | :heavy_check_mark:       |
+| sbt-sonatype              |                          |                    | :heavy_check_mark:       |
 
 ## Usage
 
@@ -17,37 +35,12 @@ __Prerequisites__:
 
 _sbt:_
 ```
-sbt new olivierschultz/typelevel-scala-template.g8
+sbt new olivierschultz/typelevel-scala-template.g8 -b <branch-name>
 ```
 _or_
 ```
-g8 https://github.com/olivierschultz/typelevel-scala-template.g8
+g8 https://github.com/olivierschultz/typelevel-scala-template.g8 -b <branch-name>
 ```
-## Setup
-
-### Github Pages
-
-1. Initial gh-pages branch using the directions from [sbt-ghpages](https://github.com/sbt/sbt-ghpages/blob/7e2ee06180a5a955a89659915ec8cd75ea28147e/README.md#initializing-the-gh-pages-branch).
-
-2. Go into Travis-CI.com, there you will need to configure and enter a value for environment variable `GITHUB_TOKEN` with a credential that can access your account. [Creating A Token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line).
-
-### Sonatype Publishing
-
-1. Setup Sonatype Account if you have not already. Good documentation on the process can be found on the [sbt-release-early-wiki](https://github.com/scalacenter/sbt-release-early/wiki/How-to-release-with-Sonatype#you-dont-have-a-sonatype-account).
-
-2. Go into Travis-CI.com, there you will need to configure and enter values for environment variables `SONATYPE_USERNAME` and `SONATYPE_PASSWORD` for publishing SNAPSHOTS to sonatype.
-
-### Changelog Generator
-
-I highly recommend to use a changelog generator with Github Release to make it easier for users and contributors to see precisely what notable changes have been made between each release (or version) of the project.
-
-Check out [github-changelog-generator](https://github.com/github-changelog-generator/github-changelog-generator#installation).
-
-## Inspiration
-
-This template gathers best practices from several typelevel projects. And also:
-
-* [library.g8](https://github.com/ChristopherDavenport/library.g8) by [Christopher Davenport](https://github.com/ChristopherDavenport).
 
 ## Template license
 

@@ -1,6 +1,6 @@
 codecov:
   notify:
-    require_ci_to_pass: yes
+    require_ci_to_pass: no
 
 coverage:
   precision: 2
@@ -10,7 +10,7 @@ coverage:
   status:
     project: yes
     patch: yes
-    changes: no
+    changes: yes
 
 parsers:
   gcov:

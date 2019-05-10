@@ -3,10 +3,12 @@ sudo: required
 language: scala
 
 scala:
+  - 2.11.12
   - 2.12.8
-  - 2.13.0-M5
+  - 2.13.0-RC1
 
 jdk:
+  - openjdk8
   - openjdk11
 
 before_install:
@@ -23,7 +25,6 @@ stages:
   - name: cov
   - name: fmt
   - name: build
-  - name: mima
   - name: microsite
   - name: release
     if: (branch = master AND type = push) OR (tag IS present)
@@ -41,22 +42,17 @@ jobs:
     - &fmt
       stage: fmt
       name: "fmt"
-      script: sbt ++\$TRAVIS_SCALA_VERSION scalafmtCheck test:scalafmtCheck scalafmtSbtCheck undeclaredCompileDependenciesTest unusedCompileDependenciesTest headerCheck
+      script: sbt ++\$TRAVIS_SCALA_VERSION scalafmtCheck test:scalafmtCheck scalafmtSbtCheck undeclaredCompileDependenciesTest headerCheck
 
     - &build
       stage: build
       name: "build"
       script: sbt ++\$TRAVIS_SCALA_VERSION clean test tut
 
-    - &mima
-      stage: mima
-      name: "mima"
-      script: sbt ++\$TRAVIS_SCALA_VERSION mimaReportBinaryIssues
-
     - &microsite
       stage: microsite
       name: "microsite"
-      script: sbt ++\$TRAVIS_SCALA_VERSION docs/makeMicrosite
+      script: sbt ++\$TRAVIS_SCALA_VERSION site/makeMicrosite
 
     - &release
       stage: release
@@ -66,7 +62,7 @@ jobs:
     - &publishMicrosite
       stage: publishMicrosite
       name: "publichMicrosite"
-      script: sbt ++\$TRAVIS_SCALA_VERSION docs/publishMicrosite
+      script: sbt ++\$TRAVIS_SCALA_VERSION site/publishMicrosite
 
 cache:
   directories:
