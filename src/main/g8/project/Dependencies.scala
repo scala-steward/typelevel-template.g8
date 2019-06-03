@@ -4,15 +4,15 @@ object Dependencies {
 
   object Versions {
     val cats       = "1.5.0"
-    val catsEffect = "1.2.0"
+    val catsEffect = "1.3.1"
 
     // Test
     val scalaTest  = "3.0.7"
     val scalaCheck = "1.14.0"
 
     // Compiler
-    val kindProjector    = "0.10.0"
-    val betterMonadicFor = "0.3.0-M4"
+    val kindProjector    = "0.10.2"
+    val betterMonadicFor = "0.3.0"
   }
 
   object Libraries {
