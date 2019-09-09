@@ -4,7 +4,7 @@ name := """$name$"""
 
 organization in ThisBuild := "$organization$"
 
-crossScalaVersions in ThisBuild := Seq("$scala_version_211$", scalaVersion.value, "$scala_version_213$")
+crossScalaVersions in ThisBuild := Seq("$scala_version_212$", "$scala_version_213$")
 
 lazy val warts = Warts.allBut(
   Wart.Any,

@@ -13,7 +13,7 @@ Add this to your `build.sbt`:
 libraryDependencies += "$organization$" %% "$name$" % "<version>"
 ```
 
-Cross-builds are available for Scala $scala_version_211$, $scala_version_212$ and $scala_version_213$.
+Cross-builds are available for Scala $scala_version_212$ and $scala_version_213$.
 
 ### Community
 

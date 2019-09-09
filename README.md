@@ -7,9 +7,9 @@
 This is a [Giter8](http://www.foundweekends.org/giter8/) template to start new Typelevel Scala Projects based on Cats v1.x.x.
 
 __Prerequisites__:
-* JDK8+
+* JDK11+
 * Giter8 0.11.0
-* Scala 2.12.x (also compatible with scala 2.11.12 and 2.13.0-RC1)
+* Scala 2.12.x (also compatible with scala 2.13.0)
 
 ### Features
 
