@@ -23,7 +23,7 @@ jobs:
       TERM: dumb
 
     steps:
-      - checkout:
+      - checkout
 
       # Download and cache dependencies
       - restore_cache:
@@ -36,12 +36,9 @@ jobs:
 
       - save_cache:
           paths:
-            - ~/.sbt
-            - ~/.ivy2
             - ~/.m2
-            - ~/.cache/coursier
           key: v1-dependencies--{{ checksum "build.sbt" }}
 
       # run tests!
       - run:
-          command: sbt g8Test
+          command: cat /dev/null | sbt g8Test
