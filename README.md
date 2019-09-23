@@ -10,7 +10,7 @@ __Prerequisites__:
 * Giter8 0.11.0
 * Scala 2.12.x (also compatible with 2.13.x)
 
-### Features
+## Features
 
 |                           | light (`light-features`) | medium (`master`)  | heavy (`heavy-features`) |
 |---------------------------|--------------------------|--------------------|--------------------------|
