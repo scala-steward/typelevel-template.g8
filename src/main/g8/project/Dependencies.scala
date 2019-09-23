@@ -3,12 +3,12 @@ import sbt._
 object Dependencies {
 
   object Versions {
-    val cats       = "1.6.1"
-    val catsEffect = "1.4.0"
+    val cats       = "2.0.0"
+    val catsEffect = "2.0.0"
 
     // Test
     val scalaTest  = "3.0.8"
-    val scalaCheck = "1.14.0"
+    val scalaCheck = "1.14.1"
 
     // Compiler
     val kindProjector    = "0.10.3"

@@ -1,15 +1,14 @@
 # Typelevel Giter8 Template 
 
-[![Build Status](https://travis-ci.com/olivierschultz/typelevel-template.g8.svg?branch=master)](https://travis-ci.com/olivierschultz/typelevel-template.g8)
+[![CircleCI](https://circleci.com/gh/olivierschultz/typelevel-template.g8/tree/master.svg?style=svg)](https://circleci.com/gh/olivierschultz/typelevel-template.g8/tree/master)
 [![codecov](https://codecov.io/gh/olivierschultz/typelevel-template/branch/master/graphs/badge.svg)](https://codecov.io/gh/olivierschultz/typelevel-template)
-<a href="https://typelevel.org/cats/"><img src="https://typelevel.org/cats/img/cats-badge.svg" height="40px" alt="Cats friendly" /></a>
 
-This is a [Giter8](http://www.foundweekends.org/giter8/) template to start new Typelevel Scala Projects based on Cats v1.x.x.
+This is a [Giter8](http://www.foundweekends.org/giter8/) template to start new Typelevel Scala Projects based on Cats v2.x.x.
 
 __Prerequisites__:
-* JDK11+
+* JDK8+
 * Giter8 0.11.0
-* Scala 2.12.x (also compatible with scala 2.13.0)
+* Scala 2.12.x (also compatible with 2.13.x)
 
 ### Features
 
@@ -18,9 +17,8 @@ __Prerequisites__:
 | scalafmt                  | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
 | sbt-tpolecat              | :heavy_check_mark:       | :heavy_check_mark: | :heavy_check_mark:       |
 | sbt-explicit-dependencies |                          | :heavy_check_mark: | :heavy_check_mark:       |
-| sbt-wartremover           |                          | :heavy_check_mark: | :heavy_check_mark:       |
 | sbt-scoverage             |                          | :heavy_check_mark: | :heavy_check_mark:       |
-| TravisCI                  |                          | :heavy_check_mark: | :heavy_check_mark:       |
+| CircleCI                  |                          | :heavy_check_mark: | :heavy_check_mark:       |
 | sbt-header                |                          |                    | :heavy_check_mark:       |
 | tut-plugin                |                          |                    | :heavy_check_mark:       |
 | sbt-microsites            |                          |                    | :heavy_check_mark:       |

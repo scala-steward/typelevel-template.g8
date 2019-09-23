@@ -4,25 +4,13 @@ name := """$name$"""
 
 organization in ThisBuild := "$organization$"
 
-crossScalaVersions in ThisBuild := Seq("$scala_version_212$", "$scala_version_213$")
+scalaVersion in ThisBuild := "$scala_version_212$"
 
-lazy val warts = Warts.allBut(
-  Wart.Any,
-  Wart.ArrayEquals,
-  Wart.Nothing,
-  Wart.Product,
-  Wart.Serializable,
-  Wart.Overloading,
-  Wart.NonUnitStatements,
-  Wart.ImplicitConversion,
-  Wart.PublicInference,
-  Wart.ImplicitParameter
-)
+crossScalaVersions in ThisBuild := Seq("$scala_version_212$", "$scala_version_213$")
 
 lazy val commonSettings = Seq(
   organizationName := "$organization$",
-  wartremoverErrors in (Compile, compile) := warts,
-  wartremoverErrors in (Test, compile) := warts,
+  scalafmtOnCompile := true,
   libraryDependencies ++= Seq(
     Libraries.cats,
     Libraries.catsEffect,
@@ -33,16 +21,10 @@ lazy val commonSettings = Seq(
   )
 )
 
-lazy val testSettings = Seq(
-  fork in Test := true,
-  parallelExecution in Test := false
-)
-
 lazy val `$name$-root` =
   (project in file("."))
     .aggregate(`$name$-core`)
 
 lazy val `$name$-core` = project
   .in(file("core"))
-  .settings(commonSettings)
-  .settings(testSettings)
+  .settings(commonSettings: _*)
