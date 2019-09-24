@@ -7,7 +7,7 @@ scala_213: &scala_213
   SCALA_VERSION: 2.13.1
 
 jdk_8: &jdk_8
-    JDK_VERSION: 8
+  JDK_VERSION: 8
 
 jdk_11: &jdk_11
   JDK_VERSION: 11
@@ -20,7 +20,7 @@ install_jdk: &install_jdk
   - run:
       name: Install JDK
       command: |
-        while $(ps aux | grep -i ' apt ' | grep -v grep > /dev/null); do sleep 1; done # Wait for apt to be ready
+        while \$(ps aux | grep -i ' apt ' | grep -v grep > /dev/null); do sleep 1; done # Wait for apt to be ready
         sudo rm /etc/apt/sources.list.d/*
         sudo tee /etc/apt/sources.list > /dev/null \<< 'EOF'
         deb http://mirror.math.princeton.edu/pub/ubuntu/ xenial main universe
@@ -28,14 +28,14 @@ install_jdk: &install_jdk
         deb http://mirror.math.princeton.edu/pub/ubuntu/ xenial-backports main universe
         deb http://mirror.math.princeton.edu/pub/ubuntu/ xenial-security main restricted universe
         EOF
-        if [ $JDK_VERSION == 11 ]; then
+        if [ \$JDK_VERSION == 11 ]; then
           wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | sudo apt-key add -
           sudo add-apt-repository https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ -y
         fi
         sudo apt update
-        if [ $JDK_VERSION == 11 ]; then
+        if [ \$JDK_VERSION == 11 ]; then
           sudo apt install -y adoptopenjdk-11-hotspot
-        elif [ $JDK_VERSION == 8 ]; then
+        elif [ \$JDK_VERSION == 8 ]; then
           sudo apt install -y openjdk-8-jdk
         fi
         java -version
@@ -66,7 +66,7 @@ coverage: &coverage
     - <<: *install_codecov
     - run:
         name: Coverage code
-        command: sbt ++${SCALA_VERSION}! clean coverage test coverageReport && codecov
+        command: sbt ++\${SCALA_VERSION}! clean coverage test coverageReport && codecov
     - <<: *save_cache
 
 compile: &compile
@@ -75,7 +75,7 @@ compile: &compile
     - <<: *load_cache
     - run:
         name: Compile code
-        command: ./sbt ++${SCALA_VERSION}! test:compile
+        command: ./sbt ++\${SCALA_VERSION}! test:compile
     - <<: *save_cache
 
 lint: &lint
@@ -84,7 +84,7 @@ lint: &lint
     - <<: *load_cache
     - run:
         name: Lint code
-        command: ./sbt ++${SCALA_VERSION}! scalafmtSbtCheck scalafmtCheck test:scalafmtCheck undeclaredCompileDependenciesTest
+        command: ./sbt ++\${SCALA_VERSION}! scalafmtSbtCheck scalafmtCheck test:scalafmtCheck undeclaredCompileDependenciesTest
     - <<: *save_cache
 
 test: &test
@@ -94,7 +94,7 @@ test: &test
     - <<: *install_jdk
     - run:
         name: Run tests
-        command: ./sbt ++${SCALA_VERSION}! test
+        command: ./sbt ++\${SCALA_VERSION}! test
     - <<: *save_cache
 
 jobs:
@@ -141,22 +141,22 @@ workflows:
       - lint:
           filters:
             tags:
-              only: /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
+              only: /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?\$/
       - test_212_jdk8:
           requires:
             - lint
           filters:
             tags:
-              only: /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
+              only: /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?\$/
       - test_213_jdk8:
           requires:
             - lint
           filters:
             tags:
-              only: /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
+              only: /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?\$/
       - test_212_jdk11:
           requires:
             - lint
           filters:
             tags:
-              only: /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
+              only: /^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?\$/

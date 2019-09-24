@@ -3,7 +3,7 @@
 [![CircleCI](https://circleci.com/gh/olivierschultz/typelevel-template.g8/tree/master.svg?style=svg)](https://circleci.com/gh/olivierschultz/typelevel-template.g8/tree/master)
 [![codecov](https://codecov.io/gh/olivierschultz/typelevel-template/branch/master/graphs/badge.svg)](https://codecov.io/gh/olivierschultz/typelevel-template)
 
-This is a [Giter8](http://www.foundweekends.org/giter8/) template to start new Typelevel Scala Projects based on Cats v2.x.x.
+This is a [Giter8](http://www.foundweekends.org/giter8/) template to start new Typelevel Scala Projects based on Cats.
 
 __Prerequisites__:
 * JDK8+
@@ -20,11 +20,9 @@ __Prerequisites__:
 | sbt-scoverage             |                          | :heavy_check_mark: | :heavy_check_mark:       |
 | CircleCI                  |                          | :heavy_check_mark: | :heavy_check_mark:       |
 | sbt-header                |                          |                    | :heavy_check_mark:       |
-| tut-plugin                |                          |                    | :heavy_check_mark:       |
+| sbt-release-early         |                          |                    | :heavy_check_mark:       |
+| tut                       |                          |                    | :heavy_check_mark:       |
 | sbt-microsites            |                          |                    | :heavy_check_mark:       |
-| sbt-release               |                          |                    | :heavy_check_mark:       |
-| sbt-pgp                   |                          |                    | :heavy_check_mark:       |
-| sbt-sonatype              |                          |                    | :heavy_check_mark:       |
 
 ## Usage
 
